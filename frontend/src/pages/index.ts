@@ -1,0 +1,16 @@
+import router from './router';
+
+export {
+  PATH_DASHBOARD,
+  PATH_SIGN_IN,
+  PATH_SIGN_UP,
+  PATH_PRESENTATION,
+  PATH_PRESENTATIONS,
+  PATH_FORGOT_PASSWORD,
+  PATH_EMAIL_VERIFICATION,
+  PATH_SETTINGS,
+  PATH_RESET_PASSWORD,
+  PATH_EMAIL_SENDED,
+} from './pagePath';
+
+export default router;

@@ -1,0 +1,16 @@
+.box {
+  border: 1px solid var(--primary-color);
+  background-color: #fff;
+  transition: var(--transform);
+  padding: 16px;
+  box-shadow: var(--base-box-shadow);
+  width: 300px;
+  min-height: calc(100vh - 100px);
+  flex-shrink: 0;
+}
+
+.files {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100vh - 360px);
+}

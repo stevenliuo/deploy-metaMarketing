@@ -1,0 +1,43 @@
+.mainIcon {
+  font-size: 36px;
+  color: var(--excel-green);
+}
+
+.box {
+  border: 1px solid var(--primary-color);
+  background-color: #fff;
+  padding: 4px;
+  box-shadow: var(--base-box-shadow);
+}
+
+.listsNames {
+  padding: 0 4px;
+}
+
+.skeleton {
+  flex-grow: 1;
+}
+
+.skeleton > * {
+  width: 100% !important;
+}
+
+.deleteIcon {
+  color: var(--danger-color);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.editIcon {
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.disabled {
+  color: var(--gray);
+}
+
+.name {
+  word-break: break-word;
+}

@@ -1,0 +1,13 @@
+.box {
+  background-color: #fff;
+  padding: 8px 16px;
+}
+
+.sortIcon {
+  font-size: 20px;
+  transform: var(--transform);
+}
+
+.active {
+  color: var(--primary-color);
+}

@@ -1,0 +1,2 @@
+class ScreenshotMakerException(Exception):
+    pass

@@ -1,0 +1,19 @@
+.box {
+  width: 450px;
+}
+
+.iconBtn {
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.deleteBtn {
+  color: var(--danger-color);
+}
+.copyBtn {
+  color: var(--primary-color);
+}
+.editBtn {
+  color: var(--primary-color)
+}
+

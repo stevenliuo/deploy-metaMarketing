@@ -1,0 +1,9 @@
+.deleteIcon {
+  color: var(--danger-color);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.disabled {
+  color: var(--gray);
+}

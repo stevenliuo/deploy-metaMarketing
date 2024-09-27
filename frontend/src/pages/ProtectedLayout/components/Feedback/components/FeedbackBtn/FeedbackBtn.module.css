@@ -1,0 +1,31 @@
+.btn {
+  position: fixed;
+  border: 3px solid var(--primary-color);
+  padding: 15px;
+  background: white;
+  border-radius: 50%;
+  cursor: grab  !important;
+  box-shadow: var(--base-box-shadow);
+}
+
+.btnIcon {
+  color: var(--primary-color);
+  font-size: 35px;
+}
+
+.areaDrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  cursor: grab  !important;
+}
+.btn:hover {
+  z-index: 1001;
+}
+
+.btn:hover + .areaDrop {
+ display: block !important;
+}

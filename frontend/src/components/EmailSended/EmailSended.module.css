@@ -1,0 +1,15 @@
+.content {
+  background: #fff;
+  padding: 24px;
+  width: 350px;
+  box-shadow: var(--base-box-shadow);
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.icon {
+  font-size: 60px;
+  color: var(--primary-color);
+}

@@ -1,0 +1,14 @@
+.btn {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  border: 3px solid var(--primary-color);
+  padding: 15px;
+  background: white;
+  border-radius: 50%;
+}
+
+.btnIcon {
+  color: var(--primary-color);
+  font-size: 35px;
+}

@@ -1,0 +1,6 @@
+.content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100vh - 100px);
+  flex-grow: 1;
+}

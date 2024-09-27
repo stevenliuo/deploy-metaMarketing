@@ -1,0 +1,114 @@
+version: "3.8"
+
+
+volumes:
+  data-redis:
+  data-postgres:
+
+
+services:
+
+  server:
+    image: pptai-server:latest
+    restart: always
+    volumes:
+      - ../../server_static:/web_app/server_static
+      - ../../media:/web_app/media
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
+  nginx:
+    image: pptai-nginx:latest
+    volumes:
+      - ../../server_static:/server_static
+      - ../../media:/media
+      - ../../certbot/conf:/etc/letsencrypt
+      - ../../certbot/www:/var/www/certbot
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - server
+
+  celery-openai-worker:
+    image: pptai-celery:latest
+    command: celery --app server worker -Q openai -c 30 --loglevel=info
+    restart: always
+    depends_on:
+      - redis
+
+  celery-ppt-task-worker:
+    image: pptai-celery:latest
+    command: celery --app server worker -Q ppt_task_creator -c 30 --loglevel=info
+    restart: always
+    depends_on:
+      - redis
+
+  celery-mail-worker:
+    image: pptai-celery:latest
+    command: celery --app server worker -Q mail_notification -c 5 --loglevel=info
+    restart: always
+    depends_on:
+      - redis
+
+#  celery-flower:
+#    image: mher/flower
+#    ports:
+#      - '5555:5555'
+#    command: 'celery flower'
+#    restart: always
+
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - ../../data-redis:/data
+    ports:
+      - '${EXTERNAL_REDIS_PORT}:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASS}
+    logging:
+      options:
+        max-file: "5"
+        max-size: "5m"
+
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - '${EXTERNAL_DB_PORT}:5432'
+    volumes:
+      - ../../data-postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    logging:
+      options:
+        max-file: "5"
+        max-size: "5m"
+
+  ppt-composer:
+    image: pptai-composer:latest
+    depends_on:
+      - redis
+      - postgres
+    restart: always
+    logging:
+      options:
+        max-file: "5"
+        max-size: "5m"
+
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - ../../certbot/conf:/etc/letsencrypt
+      - ../../certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"

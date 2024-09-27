@@ -1,0 +1,99 @@
+server {
+        listen 80;
+        listen [::]:80;
+
+        server_name pptai.dataox.io;
+
+        client_max_body_size 128M;
+
+        location /static {
+        alias /server_static;
+        }
+
+        location /media {
+        alias /media;
+        }
+
+        location /api {
+        try_files $uri @proxy_api;
+        }
+
+        location /admin {
+        try_files $uri @proxy_api;
+        }
+
+        location / {
+        root /usr/share/nginx/html;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+        }
+
+        location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        }
+
+        location @proxy_api {
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_pass http://server:${SERVER_PORT};
+        }
+}
+
+server {
+    if ($host = pptai.dataox.io) {
+        return 301 https://$host$request_uri;
+    }
+	listen 80;
+	server_name pptai.dataox.io;
+    return 404;
+}
+
+
+server {
+    listen 443 ssl;
+    server_name pptai.dataox.io;
+    client_max_body_size 20M;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    ssl_certificate /etc/letsencrypt/live/pptai.dataox.io-0001/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/pptai.dataox.io-0001/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+
+    location /static {
+        alias /server_static;
+    }
+
+    location /media {
+        alias /media;
+    }
+
+    location /api {
+        try_files $uri @proxy_api;
+    }
+
+    location /admin {
+        try_files $uri @proxy_api;
+    }
+
+    location / {
+        root /usr/share/nginx/html;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+    location @proxy_api {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass http://server:${SERVER_PORT};
+    }
+}

@@ -1,0 +1,6 @@
+{% autoescape off %}
+  To confirm access for user {{user}}, please visit the link below:
+
+  {{protocol}}://{{domain}}/email-verification?uid={{uid}}&token={{token}}
+
+{% endautoescape %}

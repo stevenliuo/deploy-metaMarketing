@@ -1,0 +1,22 @@
+.toolbar {
+  margin-left: -50px;
+  margin-bottom: -20px;
+  margin-top: -16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 16px;
+  background-color: var(--primary-color);
+}
+
+.icon {
+  cursor: pointer;
+  color: #FFF;
+  font-size: 24px;
+}
+
+.iconDisabled {
+  cursor: not-allowed;
+  color: var(--gray);
+}

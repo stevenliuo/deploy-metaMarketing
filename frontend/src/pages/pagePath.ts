@@ -1,0 +1,10 @@
+export const PATH_DASHBOARD = '/dashboard';
+export const PATH_SIGN_IN = '/sign-in';
+export const PATH_SIGN_UP = '/sign-up';
+export const PATH_FORGOT_PASSWORD = '/forgot-password';
+export const PATH_SETTINGS = '/settings';
+export const PATH_PRESENTATIONS = '/presentations';
+export const PATH_PRESENTATION = '/presentation/:id';
+export const PATH_EMAIL_VERIFICATION = '/email-verification';
+export const PATH_RESET_PASSWORD = '/reset-password';
+export const PATH_EMAIL_SENDED = '/email-sent';

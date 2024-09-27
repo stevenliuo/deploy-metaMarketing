@@ -1,0 +1,17 @@
+.content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 100px);
+  flex-grow: 1;
+}
+
+.slide {
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  border: 1px solid var(--primary-color);
+  box-shadow: var(--base-box-shadow);
+  height: 300px;
+  width: 450px;
+}

@@ -1,0 +1,27 @@
+.box {
+  width: 100%;
+  max-width: 500px; 
+  background: #fff;
+  box-shadow: var(--base-box-shadow);
+}
+.content {
+  height: calc(100vh - 160px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.header {
+  background: var(--gray-lite);
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--primary-color-light);
+}
+
+.iconPPT {
+  color: #D24726;
+  font-size: 20px;
+}
+
+.iconDelete {
+  color: #FF0000;
+  font-size: 16px;
+  cursor: pointer;
+}
